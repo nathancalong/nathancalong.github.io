@@ -1,0 +1,52 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "personal-website",
+	"context": "..",
+	"dockerFile": "../Dockerfile",
+	"remoteUser": "root",
+	"forwardPorts": [
+		5173
+	],
+	"workspaceFolder": "/usr/src/app",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/usr/src/app,type=bind",
+	"mounts": [
+		"source=node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume"
+	],
+	"containerEnv": {
+		"WDS_SOCKET_HOST": "127.0.0.1",
+        "CHOKIDAR_USEPOLLING": "true",
+        "WATCHPACK_POLLING": "true" 
+	},
+	// "postAttachCommand": "npm run dev",
+	"customizations": {
+		"vscode": {
+			"editor.tabSize": 2,
+			"editor.formatOnSave": true,
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"dsznajder.es7-react-js-snippets",
+				"ms-azuretools.vscode-docker",
+				"pkief.material-icon-theme"
+			]
+		},
+		"[javascript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.formatOnSave": false
+		},
+		"[javascriptreact]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.formatOnSave": false
+		},
+		"[typescript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.formatOnSave": false
+		},
+		"[typescriptreact]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.formatOnSave": false
+		},
+		"prettier-eslint.eslintIntegration": true
+	}
+}
