@@ -1,5 +1,10 @@
 FROM node:20-slim
 
+RUN apt-get update && \
+    # Add ca-certificate package to make git work over HTTPS
+    apt-get install --reinstall ca-certificates -y && \
+    update-ca-certificates
+
 USER node
 
 # Install project dependencies
