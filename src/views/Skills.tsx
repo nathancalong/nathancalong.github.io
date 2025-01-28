@@ -3,7 +3,7 @@ import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
 import DataObject from "@mui/icons-material/DataObject";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import TerminalOutlinedIcon from "@mui/icons-material/TerminalOutlined";
-import SkillCard from "./SkillCard";
+import SkillCard from "../components/SkillCard";
 
 export default function Skills() {
   return (
@@ -12,7 +12,7 @@ export default function Skills() {
         id="skills"
         maxWidth={false}
         sx={{
-          backgroundColor: "#0f0f0f",
+          backgroundColor: "#151515",
           p: 5,
           display: "flex",
           justifyContent: "center",
@@ -20,7 +20,7 @@ export default function Skills() {
         }}
       >
         <Box maxWidth="xl">
-          <Typography variant="h2" color="white" mb={5}>
+          <Typography variant="h2" mb={5}>
             Skills
           </Typography>
           <Grid2 container spacing={8} alignItems="stretch">

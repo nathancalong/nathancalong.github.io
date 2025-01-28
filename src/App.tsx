@@ -1,14 +1,9 @@
-import Navigation from "./components/Navigation";
-import Main from "./components/Main";
-import Skills from "./components/Skills";
-import Footer from "./components/Footer";
-import Projects from "./components/Projects";
+import { Footer, Home, Navigation, Projects, Skills } from "./views";
 
 // tsParticles imports
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import {
-  type Container as ParticleContainer,
   type ISourceOptions,
   MoveDirection,
   OutMode,
@@ -22,12 +17,6 @@ function App() {
       await loadSlim(engine);
     });
   }, []);
-
-  const particlesLoaded = async (
-    container?: ParticleContainer
-  ): Promise<void> => {
-    console.log(container);
-  };
 
   const options: ISourceOptions = useMemo(
     () => ({
@@ -84,13 +73,9 @@ function App() {
 
   return (
     <>
-      <Particles
-        id="tsparticles"
-        particlesLoaded={particlesLoaded}
-        options={options}
-      />
+      <Particles id="tsparticles" options={options} />
       <Navigation />
-      <Main />
+      <Home />
       <Skills />
       <Projects />
       <Footer />

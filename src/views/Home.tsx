@@ -1,9 +1,17 @@
 import Portrait from "../assets/images/portrait.jpg";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { alpha, Avatar, Container, Grid2, Typography } from "@mui/material";
+import {
+  alpha,
+  Avatar,
+  Container,
+  Grid2,
+  Typography,
+  useTheme,
+} from "@mui/material";
 
-function Main() {
+export default function Home() {
+  const theme = useTheme();
   return (
     <Container
       id="home"
@@ -32,18 +40,18 @@ function Main() {
           alignItems="flex-start"
           textAlign="left"
         >
-          <Typography
-            variant="h1"
-            color="white"
-            bgcolor={alpha("#0f0f0f", 0.5)}
-          >
+          <Typography variant="h1" bgcolor={alpha("#0f0f0f", 0.5)}>
             Nathan Long
           </Typography>
-          <Typography
-            variant="h3"
-            color="white"
-            bgcolor={alpha("#0f0f0f", 0.5)}
-          >
+          <hr
+            style={{
+              color: theme.palette.primary.main,
+              backgroundColor: theme.palette.primary.main,
+              height: 5,
+              width: "100%",
+            }}
+          />
+          <Typography variant="h3" bgcolor={alpha("#0f0f0f", 0.5)}>
             Mechatronics Software Engineer
           </Typography>
           <Grid2>
@@ -62,5 +70,3 @@ function Main() {
     </Container>
   );
 }
-
-export default Main;

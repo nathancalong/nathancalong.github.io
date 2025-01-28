@@ -16,7 +16,7 @@ export default function Projects() {
         }}
       >
         <Box maxWidth="xl" textAlign="left">
-          <Typography variant="h2" color="white" mb={5}>
+          <Typography variant="h2" mb={5}>
             Projects
           </Typography>
         </Box>
