@@ -1,33 +1,99 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import Navigation from "./components/Navigation";
+import Main from "./components/Main";
+import Skills from "./components/Skills";
+import Footer from "./components/Footer";
+import Projects from "./components/Projects";
+
+// tsParticles imports
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import {
+  type Container as ParticleContainer,
+  type ISourceOptions,
+  MoveDirection,
+  OutMode,
+} from "@tsparticles/engine";
+import { useEffect, useMemo } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  // Initialize tsparticles
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    });
+  }, []);
+
+  const particlesLoaded = async (
+    container?: ParticleContainer
+  ): Promise<void> => {
+    console.log(container);
+  };
+
+  const options: ISourceOptions = useMemo(
+    () => ({
+      fullScreen: {
+        enable: true,
+        zIndex: -1,
+      },
+      background: {
+        color: {
+          value: "#0f0f0f",
+        },
+      },
+      fpsLimit: 120,
+      particles: {
+        color: {
+          value: "#ffffff",
+        },
+        links: {
+          color: "#ffffff",
+          distance: 150,
+          enable: true,
+          opacity: 0.5,
+          width: 1,
+        },
+        move: {
+          direction: MoveDirection.none,
+          enable: true,
+          outModes: {
+            default: OutMode.out,
+          },
+          random: false,
+          speed: 2,
+          straight: false,
+        },
+        number: {
+          density: {
+            enable: true,
+          },
+          value: 80,
+        },
+        opacity: {
+          value: 0.5,
+        },
+        shape: {
+          type: "circle",
+        },
+        size: {
+          value: { min: 1, max: 5 },
+        },
+      },
+    }),
+    []
+  );
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Particles
+        id="tsparticles"
+        particlesLoaded={particlesLoaded}
+        options={options}
+      />
+      <Navigation />
+      <Main />
+      <Skills />
+      <Projects />
+      <Footer />
     </>
   );
 }
