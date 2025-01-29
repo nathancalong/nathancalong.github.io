@@ -1,115 +1,94 @@
-import { Box, Container, Grid2, Typography } from "@mui/material";
+import { Grid2 } from "@mui/material";
 import CloudOutlinedIcon from "@mui/icons-material/CloudOutlined";
 import DataObject from "@mui/icons-material/DataObject";
 import InsightsOutlinedIcon from "@mui/icons-material/InsightsOutlined";
 import TerminalOutlinedIcon from "@mui/icons-material/TerminalOutlined";
-import SkillCard from "../components/SkillCard";
+import { Section, SkillCard } from "../components";
 
 export default function Skills() {
   return (
     <>
-      <Container
-        id="skills"
-        maxWidth={false}
-        sx={{
-          backgroundColor: "#151515",
-          p: 5,
-          display: "flex",
-          justifyContent: "center",
-          scrollMargin: "64px",
-        }}
-      >
-        <Box maxWidth="xl">
-          <Typography variant="h2" mb={5}>
-            Skills
-          </Typography>
-          <Grid2 container spacing={8} alignItems="stretch">
-            <SkillCard
-              Icon={CloudOutlinedIcon}
-              title="Cloud Solutions"
-              skills={[
-                "Lambda",
-                "EC2",
-                "API Gateway",
-                "DynamoDB",
-                "VPC",
-                "Route53",
-              ]}
-              description="As a certified AWS Cloud Practitioner, I specialize in
-                leveraging AWS to build scalable, secure, and cost-effective
-                cloud solutions. I have experience from inception to delivery,
-                both architecting and deploying cloud infrastructure tailored
-                project requirements. Whether its cloud native solution,
-                migrations, or anything inbetween, I can deliver cheap and
-                effective solutions."
-            />
+      <Section name="skills" displayText>
+        <Grid2 container spacing={8} alignItems="stretch">
+          <SkillCard
+            Icon={CloudOutlinedIcon}
+            title="Cloud Solutions"
+            skills={[
+              "Lambda",
+              "EC2",
+              "API Gateway",
+              "DynamoDB",
+              "VPC",
+              "Route53",
+            ]}
+            description="As a certified AWS Cloud Practitioner, I specialize in
+              leveraging AWS to build scalable, secure, and cost-effective
+              cloud solutions. I have experience from inception to delivery,
+              both architecting and deploying cloud infrastructure tailored
+              project requirements. Whether its cloud native solution,
+              migrations, or anything inbetween, I can deliver cheap and
+              effective solutions."
+          />
 
-            <SkillCard
-              Icon={TerminalOutlinedIcon}
-              title="Backend Development"
-              skills={[
-                "C#",
-                ".NET (Core & Framework)",
-                "Python",
-                "Microservices",
-                "APIs",
-                "Databases",
-                "Authentication",
-                "OAuth",
-              ]}
-              description="As a certified AWS Cloud Practitioner, I specialize in
-                leveraging AWS to build scalable, secure, and cost-effective
-                cloud solutions. I have experience from inception to delivery,
-                both architecting and deploying cloud infrastructure tailored
-                project requirements. Whether its cloud native solution,
-                migrations, or anything inbetween, I can deliver cheap and
-                effective solutions."
-            />
+          <SkillCard
+            Icon={TerminalOutlinedIcon}
+            title="Backend Development"
+            skills={[
+              "C#",
+              ".NET (Core & Framework)",
+              "Python",
+              "Microservices",
+              "APIs",
+              "Databases",
+              "Authentication",
+              "OAuth",
+            ]}
+            description="."
+          />
 
-            <SkillCard
-              Icon={DataObject}
-              title="Data Engineering"
-              skills={[
-                "ElasticSearch",
-                "Logstash",
-                "Kibana",
-                "DataDog",
-                "Snowflake",
-                "Tableau",
-                "SQL",
-              ]}
-              description="I have experience designing robust data pipelines
-                that can process, store, and analyze large volumes of data in
-                near real-time. From observability platforms, data warehousing
-                technologies, as well as the backend ETL pipelines and data
-                architectures, I ensure the integrity, availability, and
-                accessibility of data across platforms and systems."
-            />
+          <SkillCard
+            Icon={DataObject}
+            title="Data Engineering"
+            skills={[
+              "ElasticSearch",
+              "Logstash",
+              "Kibana",
+              "DataDog",
+              "Snowflake",
+              "Tableau",
+              "SQL",
+            ]}
+            description="I have experience designing robust data pipelines
+              that can process, store, and analyze large volumes of data in
+              near real-time. From observability platforms, data warehousing
+              technologies, as well as the backend ETL pipelines and data
+              architectures, I ensure the integrity, availability, and
+              accessibility of data across platforms and systems."
+          />
 
-            <SkillCard
-              Icon={InsightsOutlinedIcon}
-              title="DevOps & Automation"
-              skills={[
-                "Git",
-                "Github Actions",
-                "Docker",
-                "Dev Containers",
-                "Linux",
-                "Proxmox",
-                "Cucumber",
-                "TDD",
-                "BDD",
-              ]}
-              description="I automate development workflows using Git and GitHub Actions
-                for seamless CI/CD, ensuring faster and more reliable software
-                delivery. With Docker, I containerize applications for consistent 
-                deployment across environments. I also integrate testing into the pipeline
-                and use dev containers to create reproducible environments, minimizing issues and
-                improving collaboration."
-            />
-          </Grid2>
-        </Box>
-      </Container>
+          <SkillCard
+            Icon={InsightsOutlinedIcon}
+            title="DevOps & Automation"
+            skills={[
+              "Git",
+              "Github Actions",
+              "Docker",
+              "Dev Containers",
+              "Linux",
+              "Proxmox",
+              "Cucumber",
+              "TDD",
+              "BDD",
+            ]}
+            description="I automate development workflows using Git and GitHub Actions
+              for seamless CI/CD, ensuring faster and more reliable software
+              delivery. With Docker, I containerize applications for consistent 
+              deployment across environments. I also integrate testing into the pipeline
+              and use dev containers to create reproducible environments, minimizing issues and
+              improving collaboration."
+          />
+        </Grid2>
+      </Section>
     </>
   );
 }

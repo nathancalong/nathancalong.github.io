@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const navBarItems = ["home", "skills", "projects"];
+const navBarItems = ["home", "skills", "projects", "terminal"];
 
 export default function Navigation() {
   return (
@@ -21,8 +21,8 @@ export default function Navigation() {
                 <Button
                   key={item}
                   sx={{
-                    color: "#fff",
                     display: "inline-flex",
+                    color: "white",
                     textTransform: "capitilize",
                   }}
                   onClick={() =>

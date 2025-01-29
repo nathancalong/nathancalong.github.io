@@ -1,6 +1,7 @@
-import { Footer, Home, Navigation, Projects, Skills } from "./views";
+import { Footer, Home, Navigation, Projects, Skills, Terminal } from "./views";
 
 // tsParticles imports
+import { useEffect, useMemo } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import {
@@ -8,7 +9,7 @@ import {
   MoveDirection,
   OutMode,
 } from "@tsparticles/engine";
-import { useEffect, useMemo } from "react";
+import { TerminalContextProvider } from "react-terminal";
 
 function App() {
   // Initialize tsparticles
@@ -78,6 +79,9 @@ function App() {
       <Home />
       <Skills />
       <Projects />
+      <TerminalContextProvider>
+        <Terminal />
+      </TerminalContextProvider>
       <Footer />
     </>
   );

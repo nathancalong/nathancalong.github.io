@@ -14,7 +14,8 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.7.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-terminal": "^1.4.5"
   },
   "devDependencies": {
     "@emotion/react": "^11.14.0",

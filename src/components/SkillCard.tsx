@@ -27,7 +27,7 @@ export default function Skills({ Icon, title, skills, description }: Props) {
             sx={{
               display: "inline-flex",
               color: theme.palette.primary.main,
-              mx: 1,
+              mr: 1,
             }}
           />
           <Typography variant="h4" sx={{ display: "inline-flex" }}>
