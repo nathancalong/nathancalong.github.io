@@ -2,13 +2,21 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { themeOptions } from "./theme.tsx";
-import App from "./App.tsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { HomePage, SnapPage } from "./pages";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <CssBaseline />
     <ThemeProvider theme={themeOptions}>
-      <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/snap" element={<SnapPage />} />
+          <Route path="*" element={<HomePage />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   </StrictMode>
 );

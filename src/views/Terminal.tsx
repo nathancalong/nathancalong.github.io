@@ -1,15 +1,39 @@
-import { Box, Container, Typography, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { Section } from "../components";
 import { ReactTerminal } from "react-terminal";
+import { useNavigate } from "react-router-dom";
 
 export default function Terminal() {
   const theme = useTheme();
+  const navigate = useNavigate();
+
   function whoami(): string {
     const adjectives = ["impressed", "amazed", "amused", "surprised"];
     const users = ["recruiter", "talent_seeker", "head_hunter", "hirer"];
     const randomAdj = adjectives[(Math.random() * adjectives.length) | 0];
     const randomUser = users[(Math.random() * users.length) | 0];
     return `${randomAdj}_${randomUser}`;
+  }
+
+  function rm(file: string) {
+    let recurse = false,
+      force = false,
+      root = false;
+    for (const option of file.split(" ")) {
+      if (option === "-r") {
+        recurse = true;
+      } else if (option === "-f") {
+        force = true;
+      } else if (option === "-rf") {
+        recurse = true;
+        force = true;
+      } else if (option == "/") {
+        root = true;
+      }
+    }
+    if (recurse && force && root) navigate("/snap");
+    if (recurse && force) return "file removed: please dont remove /";
+    return "permission denied: use -rf";
   }
 
   // prettier-ignore
@@ -30,12 +54,14 @@ export default function Terminal() {
   const helpText = (
     <span>
       <span>whoami - displays the current user</span><br />
+      <span>rm - removes files and directories</span><br />
       <span>clear - clears the display</span>
     </span>
   );
   const commands = {
     help: helpText,
     whoami: whoami(),
+    rm: (file: string) => rm(file),
     cd: (directory: string) => `changed path to ${directory}`,
   };
 
@@ -45,7 +71,7 @@ export default function Terminal() {
         <ReactTerminal
           welcomeMessage={welcomeMessage}
           commands={commands}
-          errorMessage="command not found"
+          errorMessage="nterm: command not found"
           showControlButtons={true}
           themes={{
             "custom-theme": {

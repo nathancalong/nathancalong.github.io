@@ -1,4 +1,4 @@
-import { Footer, Home, Navigation, Projects, Skills, Terminal } from "./views";
+import { Footer, Home, Navigation, Projects, Skills, Terminal } from "../views";
 
 // tsParticles imports
 import { useEffect, useMemo } from "react";
@@ -11,7 +11,7 @@ import {
 } from "@tsparticles/engine";
 import { TerminalContextProvider } from "react-terminal";
 
-function App() {
+export default function HomePage() {
   // Initialize tsparticles
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -86,5 +86,3 @@ function App() {
     </>
   );
 }
-
-export default App;
