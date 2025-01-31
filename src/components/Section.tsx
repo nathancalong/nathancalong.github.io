@@ -22,7 +22,7 @@ export default function Section({ name, displayText, children }: Props) {
       maxWidth={false}
       sx={{
         backgroundColor: theme.palette.background.secondary,
-        p: 5,
+        py: 5,
         display: "flex",
         justifyContent: "center",
         scrollMargin: "64px",
@@ -34,7 +34,6 @@ export default function Section({ name, displayText, children }: Props) {
             {toTitleCase(name)}
           </Typography>
         )}
-
         {children}
       </Box>
     </Container>

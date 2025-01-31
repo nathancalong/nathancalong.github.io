@@ -1,28 +1,39 @@
 import { Avatar, Box, Container, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import AwSnap from "../assets/images/awsnap.png";
 
 export default function SnapPage() {
   return (
     <Container>
       <Box
-        maxWidth="xl"
-        p={5}
         display="flex"
+        flexDirection="column"
         justifyContent="center"
         alignItems="center"
       >
-        <Avatar
-          alt="Aw Snap"
-          variant="square"
-          src={AwSnap}
-          sx={{ display: "inline-flex", width: "5em", height: "5em" }}
-        />
-        <Typography
-          variant="h3"
-          ml={4}
-          sx={{ color: "black", display: "inline-flex" }}
+        <Box
+          maxWidth="xl"
+          p={5}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
         >
-          You deleted the website...
+          <Avatar
+            alt="Aw Snap"
+            variant="square"
+            src={AwSnap}
+            sx={{ display: "inline-flex", width: "4em", height: "4em" }}
+          />
+          <Typography
+            variant="h4"
+            ml={4}
+            sx={{ color: "black", display: "inline-flex" }}
+          >
+            Aw Snap! You deleted the website...
+          </Typography>
+        </Box>
+        <Typography sx={{ color: "black" }}>
+          Just joking! Click <Link to="/">here</Link> to return home.
         </Typography>
       </Box>
     </Container>
