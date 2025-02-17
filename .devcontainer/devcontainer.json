@@ -1,0 +1,37 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "personal-website",
+	"context": "..",
+	"dockerFile": "../Dockerfile",
+	"remoteUser": "node",
+	"forwardPorts": [
+		5173
+	],
+	"workspaceFolder": "/usr/src/app",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/usr/src/app,type=bind",
+	"mounts": [
+		"source=node_modules,target=${containerWorkspaceFolder}/node_modules,type=volume,consistency=cached"
+	],
+	"containerEnv": {
+		"WDS_SOCKET_HOST": "127.0.0.1",
+        "CHOKIDAR_USEPOLLING": "true",
+        "WATCHPACK_POLLING": "true" 
+	},
+	"postAttachCommand": "nohup bash -c 'npm run dev &' >/dev/null 2>&1",
+	"customizations": {
+		"vscode": {
+			"editor.tabSize": 2,
+			"editor.formatOnSave": true,
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode",
+				"ms-azuretools.vscode-docker"
+			]
+		},
+		"prettier-eslint.eslintIntegration": true
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
+	}
+}
