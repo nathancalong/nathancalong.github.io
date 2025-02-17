@@ -10,6 +10,7 @@ import {
   OutMode,
 } from "@tsparticles/engine";
 import { TerminalContextProvider } from "react-terminal";
+import { useTheme } from "@mui/material";
 
 export default function HomePage() {
   // Initialize tsparticles
@@ -19,6 +20,7 @@ export default function HomePage() {
     });
   }, []);
 
+  const theme = useTheme();
   const options: ISourceOptions = useMemo(
     () => ({
       fullScreen: {
@@ -27,16 +29,16 @@ export default function HomePage() {
       },
       background: {
         color: {
-          value: "#0f0f0f",
+          value: theme.palette.background.default,
         },
       },
       fpsLimit: 120,
       particles: {
         color: {
-          value: "#ffffff",
+          value: theme.palette.secondary.main,
         },
         links: {
-          color: "#ffffff",
+          color: theme.palette.secondary.main,
           distance: 150,
           enable: true,
           opacity: 0.5,

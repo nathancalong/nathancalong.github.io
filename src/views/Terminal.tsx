@@ -37,6 +37,28 @@ export default function Terminal() {
   }
 
   // prettier-ignore
+  const historyMessage = (
+    <span>
+      <br />
+      <span><b>ResMed</b></span><br />
+      <span><i>Software Data Engineer</i></span><br />
+      <span>Oct 2022 - Present</span><br />
+      <br />
+      <span>- Implemented various microservices using C# and Python</span><br />
+      <span>- Deployed and secured cloud infrastructure with Terraform and OAuth</span><br />
+      <span>- Created business driven analytics with ELK stack, Snowflake and Tableau</span><br />
+      <br />
+      <span><b>National Measurement Institute</b></span><br />
+      <span><i>Calibration Engineer</i></span><br />
+      <span>Mar 2021 - Sept 2022</span><br />
+      <br />
+      <span>- Calibrated gas flow devices under ISO17025 using Australia's national standards</span><br />
+      <span>- Performed data analysis and generated measurement reports</span><br />
+      <span>- Automated various manual tasks through software</span><br />
+    </span>
+  );
+
+  // prettier-ignore
   const welcomeMessage = (
     <span>
       <pre style={{color: theme.palette.primary.main}}>
@@ -54,6 +76,7 @@ export default function Terminal() {
   const helpText = (
     <span>
       <span>whoami - displays the current user</span><br />
+      <span>history - displays a brief career summary</span><br />
       <span>rm - removes files and directories</span><br />
       <span>clear - clears the display</span>
     </span>
@@ -63,6 +86,7 @@ export default function Terminal() {
     whoami: whoami(),
     rm: (file: string) => rm(file),
     cd: (directory: string) => `changed path to ${directory}`,
+    history: historyMessage,
   };
 
   return (

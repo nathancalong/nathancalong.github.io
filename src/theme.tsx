@@ -1,4 +1,4 @@
-import { createTheme, ThemeOptions } from "@mui/material";
+import { createTheme, responsiveFontSizes } from "@mui/material";
 
 declare module "@mui/material/styles" {
   interface TypeBackground {
@@ -6,7 +6,7 @@ declare module "@mui/material/styles" {
   }
 }
 
-export const themeOptions: ThemeOptions = createTheme({
+let themeOptions = createTheme({
   palette: {
     mode: "dark",
     primary: {
@@ -26,3 +26,5 @@ export const themeOptions: ThemeOptions = createTheme({
     },
   },
 });
+themeOptions = responsiveFontSizes(themeOptions);
+export default themeOptions;

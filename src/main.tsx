@@ -1,8 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import { themeOptions } from "./theme.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import themeOptions from "./theme.tsx";
 
 import { HomePage, SnapPage } from "./pages";
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   Grid2,
   Paper,
@@ -13,10 +13,10 @@ interface Props {
   Icon: React.ComponentType<SvgIconProps>;
   title: string;
   skills: string[];
-  description: string;
+  children: ReactNode;
 }
 
-export default function Skills({ Icon, title, skills, description }: Props) {
+export default function Skills({ Icon, title, skills, children }: Props) {
   const theme = useTheme();
   return (
     <Paper elevation={8} sx={{ p: 4, height: "100%" }}>
@@ -33,7 +33,7 @@ export default function Skills({ Icon, title, skills, description }: Props) {
           {title}
         </Typography>
       </Box>
-      <Typography sx={{ py: 2 }}>{description}</Typography>
+      <Typography sx={{ py: 2 }}>{children}</Typography>
       <Grid2 container alignItems="center">
         <Grid2 size="auto">
           <Typography>Tech Stack:</Typography>

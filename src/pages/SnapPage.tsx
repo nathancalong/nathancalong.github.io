@@ -33,7 +33,7 @@ export default function SnapPage() {
           </Typography>
         </Box>
         <Typography sx={{ color: "black" }}>
-          Just joking! Click <Link to="/">here</Link> to return home.
+          Just kidding! Click <Link to="/">here</Link> to return home.
         </Typography>
       </Box>
     </Container>

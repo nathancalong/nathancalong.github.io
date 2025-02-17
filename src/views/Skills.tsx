@@ -22,14 +22,14 @@ export default function Skills() {
                 "VPC",
                 "Route53",
               ]}
-              description="As a certified AWS Cloud Practitioner, I specialize in
-              leveraging AWS to build scalable, secure, and cost-effective
-              cloud solutions. I have experience from inception to delivery,
-              both architecting and deploying cloud infrastructure tailored
-              project requirements. Whether its cloud native solution,
-              migrations, or anything inbetween, I can deliver cheap and
-              effective solutions."
-            />
+            >
+              As a certified AWS Cloud Practitioner, I specialize in leveraging
+              AWS to build scalable, secure, and cost-effective cloud solutions.
+              I have experience from inception to delivery, both architecting
+              and deploying cloud infrastructure tailored project requirements.
+              Whether its cloud native solution, migrations, or anything
+              inbetween, I can deliver cheap and effective solutions.
+            </SkillCard>
           </Grid2>
 
           <Grid2 size={{ md: 6 }}>
@@ -40,14 +40,21 @@ export default function Skills() {
                 "C#",
                 ".NET (Core & Framework)",
                 "Python",
+                "OAuth",
                 "Microservices",
                 "APIs",
                 "Databases",
                 "Authentication",
-                "OAuth",
               ]}
-              description="."
-            />
+            >
+              Seasoned in backend development, specializing in building robust,
+              scalable, and modern solutions. With expertise in designing and
+              implementing complex systems, I focus on delivering
+              high-performance backend architectures that meet both functional
+              and non-functional requirements. Whether it's developing
+              microservices, integrating APIs, or managing databases, I ensure
+              seamless functionality and security across the board.
+            </SkillCard>
           </Grid2>
 
           <Grid2 size={{ md: 6 }}>
@@ -63,13 +70,14 @@ export default function Skills() {
                 "Tableau",
                 "SQL",
               ]}
-              description="I have experience designing robust data pipelines
-              that can process, store, and analyze large volumes of data in
-              near real-time. From observability platforms, data warehousing
+            >
+              I have experience designing robust data pipelines that can
+              process, store, and analyze large volumes of data in near
+              real-time. From observability platforms, data warehousing
               technologies, as well as the backend ETL pipelines and data
               architectures, I ensure the integrity, availability, and
-              accessibility of data across platforms and systems."
-            />
+              accessibility of data across platforms and systems.
+            </SkillCard>
           </Grid2>
 
           <Grid2 size={{ md: 6 }}>
@@ -87,13 +95,14 @@ export default function Skills() {
                 "TDD",
                 "BDD",
               ]}
-              description="I automate development workflows using Git and GitHub Actions
-              for seamless CI/CD, ensuring faster and more reliable software
-              delivery. With Docker, I containerize applications for consistent 
-              deployment across environments. I also integrate testing into the pipeline
-              and use dev containers to create reproducible environments, minimizing issues and
-              improving collaboration."
-            />
+            >
+              All projects need good automated workflows, using Git and GitHub
+              Actions for seamless CI/CD. With Docker, I containerize
+              applications for consistent deployment across environments. I also
+              integrate testing into the pipeline and use dev containers to
+              create reproducible environments, minimizing issues and improving
+              collaboration.
+            </SkillCard>
           </Grid2>
         </Grid2>
       </Section>
