@@ -2,6 +2,7 @@ import Portrait from "../assets/images/portrait.jpg";
 import { PrimaryLine } from "../components";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import EmailIcon from "@mui/icons-material/Email";
 import {
   alpha,
   Avatar,
@@ -13,13 +14,14 @@ import {
 
 export default function Home() {
   const theme = useTheme();
+  const buttonPadding = 8;
   return (
     <Container
       id="home"
       maxWidth={false}
       sx={{
-        mt: "64px",
-        minHeight: 600,
+        my: "64px",
+        minHeight: "450px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -37,7 +39,7 @@ export default function Home() {
           <Avatar
             alt="Nathan Long"
             src={Portrait}
-            sx={{ height: "12rem", width: "12rem" }}
+            sx={{ height: "14rem", width: "14rem" }}
           />
         </Grid2>
         <Grid2
@@ -65,11 +67,23 @@ export default function Home() {
             <a
               href="https://www.linkedin.com/in/nathan-ca-long/"
               target="_blank"
+              style={{ paddingRight: buttonPadding }}
             >
-              <LinkedInIcon htmlColor="white" />
+              <LinkedInIcon htmlColor="white" fontSize="large" />
             </a>
-            <a href="https://github.com/nathancalong/" target="_blank">
-              <GitHubIcon htmlColor="white" />
+            <a
+              href="https://github.com/nathancalong/"
+              target="_blank"
+              style={{ paddingRight: buttonPadding }}
+            >
+              <GitHubIcon htmlColor="white" fontSize="large" />
+            </a>
+            <a
+              href="mailto:nathancalong@gmail.com"
+              target="_blank"
+              style={{ paddingRight: buttonPadding }}
+            >
+              <EmailIcon htmlColor="white" fontSize="large" />
             </a>
           </Grid2>
         </Grid2>

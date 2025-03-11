@@ -21,6 +21,10 @@ export default function Skills() {
                 "DynamoDB",
                 "VPC",
                 "Route53",
+                "Cloudwatch",
+                "SNS",
+                "SQS",
+                "SES",
               ]}
             >
               As a certified AWS Cloud Practitioner, I specialize in leveraging
@@ -69,6 +73,7 @@ export default function Skills() {
                 "Snowflake",
                 "Tableau",
                 "SQL",
+                "numpy & pandas",
               ]}
             >
               I have experience designing robust data pipelines that can

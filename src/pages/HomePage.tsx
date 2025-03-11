@@ -71,7 +71,7 @@ export default function HomePage() {
         },
       },
     }),
-    []
+    [theme.palette.background.default, theme.palette.secondary.main]
   );
 
   return (

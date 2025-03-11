@@ -34,7 +34,6 @@ export default function Navigation() {
     >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Typography variant="h3">NL</Typography>
           <Box flexGrow={1} display="flex" justifyContent="flex-end">
             {navBarItems.map((item) => (
               <Button

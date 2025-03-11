@@ -28,7 +28,7 @@ export default function Section({ name, displayText, children }: Props) {
         scrollMargin: "64px",
       }}
     >
-      <Box maxWidth="xl" width="100%">
+      <Box maxWidth="lg" width="100%">
         {displayText && (
           <Typography variant="h2" mb={5}>
             {toTitleCase(name)}

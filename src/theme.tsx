@@ -21,6 +21,7 @@ let themeOptions = createTheme({
     },
   },
   typography: {
+    fontFamily: "Roboto, Arial",
     allVariants: {
       color: "white",
     },

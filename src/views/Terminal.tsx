@@ -2,6 +2,7 @@ import { Box, useTheme } from "@mui/material";
 import { Section } from "../components";
 import { ReactTerminal } from "react-terminal";
 import { useNavigate } from "react-router-dom";
+import resumePdf from "../assets/documents/resume.pdf";
 
 export default function Terminal() {
   const theme = useTheme();
@@ -34,6 +35,12 @@ export default function Terminal() {
     if (recurse && force && root) navigate("/snap");
     if (recurse && force) return "file removed: please dont remove /";
     return "permission denied: use -rf";
+  }
+
+  const resumeElement: string = "resumeLink";
+  function resume() {
+    document.getElementById(resumeElement)?.click();
+    return "resume: Opened in a new tab.";
   }
 
   // prettier-ignore
@@ -77,21 +84,25 @@ export default function Terminal() {
     <span>
       <span>whoami - displays the current user</span><br />
       <span>history - displays a brief career summary</span><br />
+      <span>resume - displays a copy of the resume</span><br />
       <span>rm - removes files and directories</span><br />
       <span>clear - clears the display</span>
     </span>
   );
   const commands = {
     help: helpText,
-    whoami: whoami(),
+    whoami: whoami(), // Call this to print the same user each time
     rm: (file: string) => rm(file),
     cd: (directory: string) => `changed path to ${directory}`,
     history: historyMessage,
+    resume: resume,
   };
 
   return (
     <Section name="terminal" displayText>
       <Box height="800px">
+        {/* Hide a link that is not visible to open the resume */}
+        <a id={resumeElement} href={resumePdf} target="_blank" />
         <ReactTerminal
           welcomeMessage={welcomeMessage}
           commands={commands}

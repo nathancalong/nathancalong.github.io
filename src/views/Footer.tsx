@@ -7,8 +7,8 @@ export default function Footer() {
       <Box display="flex" flexDirection="column" alignItems="center">
         <Typography color="white">
           A website designed & built by Nathan Long
-          <PrimaryLine size={2} />
         </Typography>
+        <PrimaryLine size={2} />
         <Typography color="white">
           Find the code for this website in{" "}
           <a

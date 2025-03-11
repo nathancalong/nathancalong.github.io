@@ -29,7 +29,7 @@ export default function SnapPage() {
             ml={4}
             sx={{ color: "black", display: "inline-flex" }}
           >
-            Aw Snap! You deleted the website...
+            You deleted the website...
           </Typography>
         </Box>
         <Typography sx={{ color: "black" }}>

@@ -54,7 +54,7 @@ export default function ProjectCard({
         const newIndex = (imageIndex + offset) % images.length;
         return newIndex >= 0 ? newIndex : images.length - 1;
       });
-    }, 350);
+    }, 300);
   }
   const imageComponent = (
     <Box display="flex" position="relative" width={{ xs: "100%", md: "60%" }}>
@@ -76,7 +76,7 @@ export default function ProjectCard({
         className={fade ? "img-fade-out" : "img-fade-in"}
         sx={{
           width: "100%",
-          height: "500px",
+          height: { xs: "500px", md: "100%" },
           borderRadius: 1,
           objectFit: "cover",
         }}
@@ -100,7 +100,12 @@ export default function ProjectCard({
 
   return (
     <Paper elevation={8}>
-      <Box display="flex" flexDirection={{ xs: "column", md: "row" }}>
+      <Box
+        display="flex"
+        flexDirection={{ xs: "column", md: "row" }}
+        height={{ md: "600px" }}
+        // height="500px"
+      >
         {imageSide === "left" && imageComponent}
         <Box p={4} width={{ xs: "100%", md: "40%" }}>
           <Box display="inline-flex" flexDirection="column">
