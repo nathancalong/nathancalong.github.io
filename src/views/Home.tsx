@@ -61,7 +61,7 @@ export default function Home() {
             variant="h3"
             bgcolor={alpha(theme.palette.background.default, 0.5)}
           >
-            Mechatronics Software Engineer
+            Mechatronic Software Engineer
           </Typography>
           <Grid2>
             <a

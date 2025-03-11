@@ -4,7 +4,6 @@ import {
   Button,
   Container,
   Toolbar,
-  Typography,
   useTheme,
 } from "@mui/material";
 
@@ -32,7 +31,7 @@ export default function Navigation() {
       position="sticky"
       sx={{ background: theme.palette.background.secondary }}
     >
-      <Container maxWidth="xl">
+      <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Box flexGrow={1} display="flex" justifyContent="flex-end">
             {navBarItems.map((item) => (
