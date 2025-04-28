@@ -11,6 +11,7 @@ export default function PrimaryLine({ size }: Props) {
       style={{
         color: theme.palette.primary.main,
         backgroundColor: theme.palette.primary.main,
+        border: "none",
         height: size,
         width: "100%",
       }}
