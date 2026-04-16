@@ -1,0 +1,69 @@
+// CRT scanline overlay
+.crt-overlay {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 1;
+    animation: scanline-scroll 0.3s linear infinite;
+  }
+}
+
+// Glow text effect
+.glow-text {
+  text-shadow:
+    0 0 8px var(--color-glow),
+    0 0 20px rgba(232, 148, 58, 0.15);
+}
+
+// Glow border effect
+.glow-border {
+  border: 1px solid var(--color-border);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: 0 0 25px rgba(232, 148, 58, 0.12);
+  }
+}
+
+// Animated grid background
+.grid-background {
+  background-image:
+    linear-gradient(rgba(232, 148, 58, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 148, 58, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+// Frosted glass
+.frosted-glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(18, 18, 25, 0.85);
+}
+
+// Accent gradient line
+.accent-line {
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-primary), transparent);
+  margin: 0.5rem 0;
+}
+
+// Phosphor glow for terminal text
+.phosphor-glow {
+  text-shadow:
+    0 0 4px rgba(232, 148, 58, 0.3),
+    0 0 8px rgba(232, 148, 58, 0.15);
+}

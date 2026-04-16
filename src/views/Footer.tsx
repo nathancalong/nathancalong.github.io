@@ -1,27 +1,20 @@
-import { Box, Typography } from "@mui/material";
-import { Section, PrimaryLine } from "../components";
+import styles from "./Footer.module.scss";
 
 export default function Footer() {
   return (
-    <Section name="footer">
-      <Box display="flex" flexDirection="column" alignItems="center">
-        <Box display="flex" flexDirection="column" alignItems="center">
-          <Typography color="white">
-            A website designed & built by Nathan Long
-          </Typography>
-          <PrimaryLine size={2} />
-          <Typography color="white">
-            Find the code for this website in{" "}
-            <a
-              href="https://github.com/nathancalong/nathancalong.github.io"
-              target="_blank"
-              style={{ color: "white" }}
-            >
-              GitHub
-            </a>
-          </Typography>
-        </Box>
-      </Box>
-    </Section>
+    <footer className={styles.footer}>
+      <p className={styles.footerText}>
+        Designed &amp; built by Nathan Long
+      </p>
+      <div className={styles.accentLine} />
+      <a
+        href="https://github.com/nathancalong/nathancalong.github.io"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.footerLink}
+      >
+        view source on github
+      </a>
+    </footer>
   );
 }

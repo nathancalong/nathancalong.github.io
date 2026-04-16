@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
-import { Box, Container, Typography, useTheme } from "@mui/material";
+import { useScrollReveal } from "@/hooks";
+import styles from "./Section.module.scss";
+import { cn } from "@/lib/utils";
 
 type Props = {
   name: string;
@@ -7,35 +9,29 @@ type Props = {
   children?: ReactNode;
 };
 
+function toTitleCase(str: string) {
+  return str.replace(
+    /\w\S*/g,
+    (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
+  );
+}
+
 export default function Section({ name, displayText, children }: Props) {
-  const theme = useTheme();
-  function toTitleCase(str: string) {
-    return str.replace(
-      /\w\S*/g,
-      (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
-    );
-  }
+  const { ref, isVisible } = useScrollReveal();
 
   return (
-    <Container
-      id={name}
-      maxWidth={false}
-      sx={{
-        backgroundColor: theme.palette.background.secondary,
-        py: 5,
-        display: "flex",
-        justifyContent: "center",
-        scrollMargin: "64px",
-      }}
-    >
-      <Box maxWidth="lg" width="100%">
+    <section id={name} className={styles.section}>
+      <div
+        ref={ref}
+        className={cn(styles.sectionInner, "reveal", isVisible && "revealed")}
+      >
         {displayText && (
-          <Typography variant="h2" mb={5}>
+          <h2 className={cn(styles.sectionTitle, "glow-text")}>
             {toTitleCase(name)}
-          </Typography>
+          </h2>
         )}
         {children}
-      </Box>
-    </Container>
+      </div>
+    </section>
   );
 }

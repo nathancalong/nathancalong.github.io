@@ -1,41 +1,53 @@
-import { Avatar, Box, Container, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import AwSnap from "../assets/images/awsnap.png";
+import AwSnap from "@/assets/images/awsnap.png";
 
 export default function SnapPage() {
   return (
-    <Container>
-      <Box
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "2rem",
+        fontFamily: "var(--font-mono)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1.5rem",
+          marginBottom: "2rem",
+        }}
       >
-        <Box
-          maxWidth="xl"
-          p={5}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
+        <img
+          src={AwSnap}
+          alt="Aw Snap"
+          style={{ width: "4em", height: "4em" }}
+        />
+        <h1
+          style={{
+            fontSize: "1.5rem",
+            color: "var(--color-primary)",
+          }}
         >
-          <Avatar
-            alt="Aw Snap"
-            variant="square"
-            src={AwSnap}
-            sx={{ display: "inline-flex", width: "4em", height: "4em" }}
-          />
-          <Typography
-            variant="h4"
-            ml={4}
-            sx={{ color: "black", display: "inline-flex" }}
-          >
-            You deleted the website...
-          </Typography>
-        </Box>
-        <Typography sx={{ color: "black" }}>
-          Just kidding! Click <Link to="/">here</Link> to return home.
-        </Typography>
-      </Box>
-    </Container>
+          ERROR: Website deleted...
+        </h1>
+      </div>
+      <p style={{ color: "var(--color-muted)", fontSize: "0.9rem" }}>
+        Just kidding! Click{" "}
+        <Link
+          to="/"
+          style={{
+            color: "var(--color-primary)",
+          }}
+        >
+          here
+        </Link>{" "}
+        to return home.
+      </p>
+    </div>
   );
 }

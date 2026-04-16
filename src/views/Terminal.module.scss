@@ -1,0 +1,49 @@
+.terminalWindow {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(240, 160, 48, 0.12);
+  box-shadow: 0 0 30px rgba(240, 160, 48, 0.08);
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminalChrome {
+  background: var(--color-surface);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(240, 160, 48, 0.08);
+  flex-shrink: 0;
+}
+
+.trafficLights {
+  display: flex;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+
+.trafficDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminalTitle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  flex: 1;
+  text-align: center;
+}
+
+.terminalBody {
+  flex: 1;
+  overflow: hidden;
+
+  // Override react-terminal styles
+  & > div {
+    height: 100% !important;
+    font-family: var(--font-mono) !important;
+  }
+}

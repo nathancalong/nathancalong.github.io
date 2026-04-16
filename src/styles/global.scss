@@ -1,0 +1,92 @@
+@use "./animations";
+@use "./effects";
+
+// Design tokens
+:root {
+  --color-background: #0a0a0f;
+  --color-surface: #121219;
+  --color-surface-raised: #1a1a22;
+  --color-primary: #E8943A;
+  --color-primary-light: #F2B866;
+  --color-primary-dim: rgba(232, 148, 58, 0.15);
+  --color-secondary: #5B8FB9;
+  --color-secondary-light: #7BAFD6;
+  --color-tertiary: #40c4aa;
+  --color-text: #E2E2EA;
+  --color-muted: #7a7a8a;
+  --color-glow: rgba(232, 148, 58, 0.30);
+  --color-border: rgba(232, 148, 58, 0.10);
+  --color-border-hover: rgba(232, 148, 58, 0.35);
+
+  --font-headline: 'Space Grotesk', system-ui, sans-serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'Space Mono', ui-monospace, monospace;
+}
+
+// Reset
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+// Custom scrollbar
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(232, 148, 58, 0.2);
+  border-radius: 3px;
+
+  &:hover {
+    background: rgba(232, 148, 58, 0.4);
+  }
+}
+
+// Selection color
+::selection {
+  background: rgba(232, 148, 58, 0.3);
+  color: var(--color-text);
+}
+
+// Link base
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-secondary);
+  }
+}
+
+// Button reset
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+// Image reset
+img {
+  max-width: 100%;
+  display: block;
+}

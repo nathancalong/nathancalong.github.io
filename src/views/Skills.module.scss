@@ -1,0 +1,25 @@
+.bentoGrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardLarge {
+  grid-column: span 7;
+
+  @media (max-width: 768px) {
+    grid-column: span 1;
+  }
+}
+
+.cardSmall {
+  grid-column: span 5;
+
+  @media (max-width: 768px) {
+    grid-column: span 1;
+  }
+}

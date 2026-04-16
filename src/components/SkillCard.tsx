@@ -1,49 +1,29 @@
-import React, { ReactNode } from "react";
-import {
-  Grid2,
-  Paper,
-  Typography,
-  Chip,
-  Box,
-  SvgIconProps,
-  useTheme,
-} from "@mui/material";
+import { ReactNode } from "react";
+import styles from "./SkillCard.module.scss";
 
 interface Props {
-  Icon: React.ComponentType<SvgIconProps>;
+  icon: ReactNode;
   title: string;
   skills: string[];
   children: ReactNode;
 }
 
-export default function Skills({ Icon, title, skills, children }: Props) {
-  const theme = useTheme();
+export default function SkillCard({ icon, title, skills, children }: Props) {
   return (
-    <Paper elevation={8} sx={{ p: 4, height: "100%" }}>
-      <Box display="flex" alignItems="center">
-        <Icon
-          fontSize="large"
-          sx={{
-            display: "inline-flex",
-            color: theme.palette.primary.main,
-            mr: 1,
-          }}
-        />
-        <Typography variant="h4" sx={{ display: "inline-flex" }}>
-          {title}
-        </Typography>
-      </Box>
-      <Typography sx={{ py: 2 }}>{children}</Typography>
-      <Grid2 container alignItems="center">
-        <Grid2 size="auto">
-          <Typography>Tech Stack:</Typography>
-        </Grid2>
-        <Grid2 size="grow">
-          {skills.map((skill) => (
-            <Chip key={skill} label={skill} sx={{ m: 1 / 2 }} />
-          ))}
-        </Grid2>
-      </Grid2>
-    </Paper>
+    <div className={styles.card}>
+      <div className={styles.cardHeader}>
+        <div className={styles.iconWrapper}>{icon}</div>
+        <h3 className={styles.cardTitle}>{title}</h3>
+      </div>
+      <p className={styles.cardBody}>{children}</p>
+      <div className={styles.techStack}>
+        <span className={styles.stackLabel}>tech_stack:</span>
+        {skills.map((skill) => (
+          <span key={skill} className={styles.chip}>
+            &gt; {skill}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
