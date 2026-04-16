@@ -40,12 +40,30 @@ const PAUSE_AFTER_OUTPUT = 600;
 
 // --- ASCII Art ---
 
-const ASCII_BANNER = `
- _  _ _____ ___ ___ __  __
+const ASCII_BANNER = ` _  _ _____ ___ ___ __  __
 | \\| |_   _| __| _ \\  \\/  |
 | .\` | | | | _||   / |\\/| |
 |_|\\_| |_| |___|_|_\\_|  |_|
-`.trimStart();
+`;
+
+// --- Cookie helpers ---
+
+const VISITED_COOKIE = "nterm_visited";
+
+function hasVisitedCookie(): boolean {
+  return document.cookie
+    .split("; ")
+    .some((c) => c.startsWith(`${VISITED_COOKIE}=`));
+}
+
+function setVisitedCookie() {
+  const expires = new Date(Date.now() + 8 * 60 * 60 * 1000).toUTCString();
+  document.cookie = `${VISITED_COOKIE}=1; expires=${expires}; path=/; SameSite=Lax`;
+}
+
+function clearVisitedCookie() {
+  document.cookie = `${VISITED_COOKIE}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; SameSite=Lax`;
+}
 
 // --- Component ---
 
@@ -54,10 +72,36 @@ function nextId() {
   return lineIdCounter++;
 }
 
+function makeWelcomeLines(): TerminalLine[] {
+  return [
+    {
+      id: nextId(),
+      type: "output",
+      content: <pre className={styles.asciiArt}>{ASCII_BANNER}</pre>,
+    },
+    {
+      id: nextId(),
+      type: "output",
+      content: (
+        <span className={styles.lineOutput}>
+          Welcome to nterm. Type `help` for commands.
+        </span>
+      ),
+    },
+    { id: nextId(), type: "blank", content: "" },
+  ];
+}
+
 export default function Terminal() {
   const navigate = useNavigate();
-  const [phase, setPhase] = useState<Phase>("ssh");
-  const [lines, setLines] = useState<TerminalLine[]>([]);
+  const skipAnimation = hasVisitedCookie();
+
+  const [phase, setPhase] = useState<Phase>(
+    skipAnimation ? "interactive" : "ssh",
+  );
+  const [lines, setLines] = useState<TerminalLine[]>(
+    skipAnimation ? makeWelcomeLines() : [],
+  );
   const [currentInput, setCurrentInput] = useState("");
   const [autoTypingText, setAutoTypingText] = useState("");
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -96,6 +140,8 @@ export default function Terminal() {
   // --- SSH intro sequence ---
   // Runs once on mount, drives through ssh → connecting → auto without re-triggering
   useEffect(() => {
+    if (skipAnimation) return;
+
     let cancelled = false;
 
     async function sleep(ms: number) {
@@ -154,7 +200,7 @@ export default function Terminal() {
                   <span className={styles.lineBold}>Nathan Long</span>
                   {"\n"}
                   <span className={styles.lineItalic}>
-                    Mechatronic Software Engineer
+                    Fullstack AI Software & Mechatronic Engineer
                   </span>
                   {"\n\n"}
                   <a
@@ -194,19 +240,17 @@ export default function Terminal() {
               content: (
                 <>
                   <span className={styles.lineAccent}>whoami</span>
-                  {"    - displays info about me\n"}
+                  {"           - displays info about me\n"}
                   <span className={styles.lineAccent}>history</span>
-                  {"   - displays career summary\n"}
+                  {"          - displays career summary\n"}
                   <span className={styles.lineAccent}>resume</span>
-                  {"    - opens my resume\n"}
-                  <span className={styles.lineAccent}>skills</span>
-                  {"    - jump to skills section\n"}
-                  <span className={styles.lineAccent}>projects</span>
-                  {"  - jump to projects section\n"}
+                  {"           - opens my resume\n"}
                   <span className={styles.lineAccent}>rm</span>
-                  {"        - removes files and directories\n"}
+                  {"               - removes files and directories\n"}
                   <span className={styles.lineAccent}>clear</span>
-                  {"     - clears the terminal"}
+                  {"            - clears the terminal\n"}
+                  <span className={styles.lineAccent}>animation</span>
+                  {"        - replay the intro animation"}
                 </>
               ),
             },
@@ -266,27 +310,14 @@ export default function Terminal() {
             },
           ];
 
-        case "skills":
-          document
-            .getElementById("skills")
-            ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        case "animation":
+          clearVisitedCookie();
+          setTimeout(() => window.location.reload(), 500);
           return [
             {
               id: nextId(),
               type: "output",
-              content: "Scrolling to skills...",
-            },
-          ];
-
-        case "projects":
-          document
-            .getElementById("projects")
-            ?.scrollIntoView({ behavior: "smooth", block: "start" });
-          return [
-            {
-              id: nextId(),
-              type: "output",
-              content: "Scrolling to projects...",
+              content: "Clearing session... reloading.",
             },
           ];
 
@@ -453,6 +484,7 @@ export default function Terminal() {
         { id: nextId(), type: "blank", content: "" },
       ]);
       setPhase("interactive");
+      setVisitedCookie();
     }
 
     typeSequence();
@@ -558,9 +590,7 @@ export default function Terminal() {
               style={{ background: "#28c840" }}
             />
           </div>
-          <span className={styles.terminalTitle}>
-            nterm — nathan@portfolio:~
-          </span>
+          <span className={styles.terminalTitle}>nterm</span>
         </div>
 
         <div className={styles.terminalBody}>
@@ -570,35 +600,32 @@ export default function Terminal() {
                 {line.content}
               </div>
             ))}
-
-            {phase === "auto" && autoTypingText !== "" && (
-              <div className={styles.line}>
-                <span className={styles.prompt}>{PROMPT}</span>
-                <span className={styles.lineCommand}>{autoTypingText}</span>
-                <span className={styles.autoTypeCursor}>_</span>
-              </div>
-            )}
-
-            {phase === "auto" && autoTypingText === "" && (
-              <div className={styles.line}>
-                <span className={styles.prompt}>{PROMPT}</span>
-                <span className={styles.autoTypeCursor}>_</span>
-              </div>
-            )}
           </div>
 
-          {phase === "interactive" && (
+          {/* Fixed input line — used for both auto-type and interactive */}
+          {(phase === "auto" || phase === "interactive") && (
             <div className={styles.inputLine}>
               <span className={styles.prompt}>{PROMPT}</span>
-              <span className={styles.inputText}>{currentInput}</span>
-              <span
-                className={styles.cursor}
-                style={
-                  isFocused ? undefined : { animation: "none", opacity: 0.4 }
-                }
-              >
-                _
-              </span>
+              {phase === "auto" ? (
+                <>
+                  <span className={styles.inputText}>{autoTypingText}</span>
+                  <span className={styles.autoTypeCursor}>_</span>
+                </>
+              ) : (
+                <>
+                  <span className={styles.inputText}>{currentInput}</span>
+                  <span
+                    className={styles.cursor}
+                    style={
+                      isFocused
+                        ? undefined
+                        : { animation: "none", opacity: 0.4 }
+                    }
+                  >
+                    _
+                  </span>
+                </>
+              )}
             </div>
           )}
 
