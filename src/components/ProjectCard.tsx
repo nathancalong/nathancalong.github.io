@@ -6,14 +6,16 @@ import styles from "./ProjectCard.module.scss";
 
 interface Props {
   title: string;
-  images: string[];
+  images?: string[];
+  customContent?: ReactNode;
   imageSide: "left" | "right";
   children?: ReactNode;
 }
 
 export default function ProjectCard({
   title,
-  images,
+  images = [],
+  customContent,
   imageSide,
   children,
 }: Props) {
@@ -39,40 +41,46 @@ export default function ProjectCard({
       )}
     >
       <div className={styles.imageSection}>
-        <img
-          src={images[imageIndex]}
-          alt={title}
-          className={cn(styles.image, fade && styles.fadeOut)}
-        />
-        {images.length > 1 && (
+        {customContent ? (
+          customContent
+        ) : (
           <>
-            <button
-              className={styles.carouselBtn}
-              style={{ left: 0 }}
-              onClick={() => scrollImage(-1)}
-              aria-label="Previous image"
-            >
-              <ChevronLeft size={28} />
-            </button>
-            <button
-              className={styles.carouselBtn}
-              style={{ right: 0 }}
-              onClick={() => scrollImage(1)}
-              aria-label="Next image"
-            >
-              <ChevronRight size={28} />
-            </button>
-            <div className={styles.imageDots}>
-              {images.map((_, i) => (
-                <span
-                  key={i}
-                  className={cn(
-                    styles.dot,
-                    i === imageIndex && styles.activeDot
-                  )}
-                />
-              ))}
-            </div>
+            <img
+              src={images[imageIndex]}
+              alt={title}
+              className={cn(styles.image, fade && styles.fadeOut)}
+            />
+            {images.length > 1 && (
+              <>
+                <button
+                  className={styles.carouselBtn}
+                  style={{ left: 0 }}
+                  onClick={() => scrollImage(-1)}
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft size={28} />
+                </button>
+                <button
+                  className={styles.carouselBtn}
+                  style={{ right: 0 }}
+                  onClick={() => scrollImage(1)}
+                  aria-label="Next image"
+                >
+                  <ChevronRight size={28} />
+                </button>
+                <div className={styles.imageDots}>
+                  {images.map((_, i) => (
+                    <span
+                      key={i}
+                      className={cn(
+                        styles.dot,
+                        i === imageIndex && styles.activeDot
+                      )}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </>
         )}
       </div>
