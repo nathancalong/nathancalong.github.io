@@ -4,7 +4,7 @@ import { useActiveSection } from "@/hooks";
 import { cn } from "@/lib/utils";
 import styles from "./Navigation.module.scss";
 
-const navBarItems = ["skills", "projects"];
+const navBarItems = ["skills", "projects", "contact"];
 
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);

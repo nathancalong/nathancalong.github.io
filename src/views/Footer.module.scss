@@ -1,31 +1,94 @@
-.footer {
-  padding: 3rem 1.5rem;
-  text-align: center;
-  border-top: 1px solid var(--color-border);
+// --- Contact Section ---
+
+.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 2rem 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 }
 
-.footerText {
-  font-family: var(--font-headline);
-  font-size: 0.85rem;
+.contactLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ascii {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.3;
+  color: var(--color-primary);
+  text-shadow: 0 0 12px var(--color-glow);
+  white-space: pre;
+  margin: 0;
+
+  @media (max-width: 480px) {
+    font-size: 0.5rem;
+  }
+}
+
+.blurb {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.6;
   color: var(--color-muted);
+  max-width: 28rem;
 }
 
-.accentLine {
-  height: 1px;
-  width: 120px;
-  margin: 1rem auto;
-  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
-  opacity: 0.3;
+.contactRight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.footerLink {
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
   font-family: var(--font-headline);
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
   color: var(--color-muted);
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease,
+    transform 0.3s ease;
 
   &:hover {
     color: var(--color-primary);
-    text-shadow: 0 0 8px var(--color-glow);
+    border-color: var(--color-border-hover);
+    box-shadow: 0 0 20px rgba(232, 148, 58, 0.1);
+    transform: translateY(-1px);
   }
+}
+
+// --- Footer Bar ---
+
+.divider {
+  height: 1px;
+  margin: 2.5rem 0 1.5rem;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-primary),
+    transparent
+  );
+  opacity: 0.3;
+}
+
+.tagline {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-muted);
+  font-style: italic;
+  padding-bottom: 1.5rem;
 }
