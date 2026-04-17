@@ -113,10 +113,29 @@ export default function Terminal() {
   const [showSshCursor, setShowSshCursor] = useState(true);
 
   const [isFocused, setIsFocused] = useState(false);
+  const [cursorPos, setCursorPos] = useState(0);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
   const resumeLinkRef = useRef<HTMLAnchorElement>(null);
+  const heroRef = useRef<HTMLElement>(null);
+
+  // --- Measure nav height for vertical centering ---
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    const nav = hero.previousElementSibling as HTMLElement | null;
+    if (!nav) return;
+
+    const update = () => {
+      hero.style.setProperty("--nav-h", `${nav.offsetHeight}px`);
+    };
+    update();
+
+    const ro = new ResizeObserver(update);
+    ro.observe(nav);
+    return () => ro.disconnect();
+  }, []);
 
   // --- Scroll to bottom ---
   const scrollToBottom = useCallback(() => {
@@ -521,6 +540,7 @@ export default function Terminal() {
         setHistoryIndex(-1);
         executeCommand(cmd);
         setCurrentInput("");
+        setCursorPos(0);
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
         if (commandHistory.length > 0) {
@@ -530,6 +550,7 @@ export default function Terminal() {
               : Math.max(0, historyIndex - 1);
           setHistoryIndex(newIndex);
           setCurrentInput(commandHistory[newIndex]);
+          setCursorPos(commandHistory[newIndex].length);
         }
       } else if (e.key === "ArrowDown") {
         e.preventDefault();
@@ -538,9 +559,11 @@ export default function Terminal() {
           if (newIndex >= commandHistory.length) {
             setHistoryIndex(-1);
             setCurrentInput("");
+            setCursorPos(0);
           } else {
             setHistoryIndex(newIndex);
             setCurrentInput(commandHistory[newIndex]);
+            setCursorPos(commandHistory[newIndex].length);
           }
         }
       } else if (e.key === "l" && e.ctrlKey) {
@@ -555,7 +578,7 @@ export default function Terminal() {
   const isSshPhase = phase === "ssh" || phase === "connecting";
 
   return (
-    <section id="home" className={styles.terminalHero}>
+    <section id="home" ref={heroRef} className={styles.terminalHero}>
       {/* SSH intro overlay */}
       <div
         className={cn(
@@ -621,16 +644,19 @@ export default function Terminal() {
                 </>
               ) : (
                 <>
-                  <span className={styles.inputText}>{currentInput}</span>
+                  <span className={styles.inputText}>
+                    {currentInput.slice(0, cursorPos)}
+                  </span>
                   <span
-                    className={styles.cursor}
-                    style={
-                      isFocused
-                        ? undefined
-                        : { animation: "none", opacity: 0.4 }
-                    }
+                    className={cn(
+                      styles.cursor,
+                      !isFocused && styles.cursorBlurred,
+                    )}
                   >
-                    _
+                    {currentInput[cursorPos] ?? " "}
+                  </span>
+                  <span className={styles.inputText}>
+                    {currentInput.slice(cursorPos + 1)}
                   </span>
                 </>
               )}
@@ -641,7 +667,14 @@ export default function Terminal() {
             ref={inputRef}
             className={styles.hiddenInput}
             value={currentInput}
-            onChange={(e) => setCurrentInput(e.target.value)}
+            onChange={(e) => {
+              setCurrentInput(e.target.value);
+              setCursorPos(e.target.selectionStart ?? e.target.value.length);
+            }}
+            onSelect={(e) => {
+              const target = e.target as HTMLInputElement;
+              setCursorPos(target.selectionStart ?? target.value.length);
+            }}
             onKeyDown={handleKeyDown}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}

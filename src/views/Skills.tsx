@@ -20,30 +20,19 @@ import GithubactionsOriginal from "devicons-react/lib/icons/GithubactionsOrigina
 import DockerOriginal from "devicons-react/lib/icons/DockerOriginal";
 import LinuxOriginal from "devicons-react/lib/icons/LinuxOriginal";
 import ProxmoxOriginalWordmark from "devicons-react/lib/icons/ProxmoxOriginalWordmark";
-import CucumberPlain from "devicons-react/lib/icons/CucumberPlain";
 import ReactOriginal from "devicons-react/lib/icons/ReactOriginal";
 import NextjsOriginal from "devicons-react/lib/icons/NextjsOriginal";
 import TypescriptOriginal from "devicons-react/lib/icons/TypescriptOriginal";
 import VitejsOriginal from "devicons-react/lib/icons/VitejsOriginal";
 import SassOriginal from "devicons-react/lib/icons/SassOriginal";
-import Html5Original from "devicons-react/lib/icons/Html5Original";
-import Css3Original from "devicons-react/lib/icons/Css3Original";
-import JavascriptOriginal from "devicons-react/lib/icons/JavascriptOriginal";
-import TensorflowOriginal from "devicons-react/lib/icons/TensorflowOriginal";
-import PytorchOriginal from "devicons-react/lib/icons/PytorchOriginal";
 import JupyterOriginal from "devicons-react/lib/icons/JupyterOriginal";
-import StreamlitOriginal from "devicons-react/lib/icons/StreamlitOriginal";
 import FastapiOriginal from "devicons-react/lib/icons/FastapiOriginal";
 
 // react-simple-icons — direct imports for tree-shaking
 // @ts-expect-error - no types for direct icon imports
-import SiLangchain from "@icons-pack/react-simple-icons/icons/SiLangchain.mjs";
-// @ts-expect-error - no types for direct icon imports
 import SiOllama from "@icons-pack/react-simple-icons/icons/SiOllama.mjs";
 // @ts-expect-error - no types for direct icon imports
 import SiClaude from "@icons-pack/react-simple-icons/icons/SiClaude.mjs";
-// @ts-expect-error - no types for direct icon imports
-import SiHuggingface from "@icons-pack/react-simple-icons/icons/SiHuggingface.mjs";
 
 // Brand icons (not in any icon library)
 import {
