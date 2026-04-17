@@ -217,10 +217,6 @@
   color: var(--color-primary);
   user-select: none;
   white-space: pre;
-
-  @media (max-width: 640px) {
-    display: block;
-  }
 }
 
 // --- Input ---

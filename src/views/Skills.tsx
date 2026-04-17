@@ -187,7 +187,7 @@ export default function Skills() {
             title="Cloud Solutions"
             skills={cloudSkills}
           >
-            <li>Certified AWS Cloud Practitioner</li>
+            <li><a href="https://www.credly.com/badges/bc83b54a-c413-4457-9d40-74247e551386" target="_blank" rel="noopener noreferrer">Certified AWS Cloud Practitioner</a></li>
             <li>Scalable, secure, and cost-effective cloud architectures</li>
             <li>End-to-end delivery from inception to production deployment</li>
             <li>

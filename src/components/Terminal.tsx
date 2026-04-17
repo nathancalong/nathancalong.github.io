@@ -27,7 +27,7 @@ interface AutoStep {
 
 // --- Constants ---
 
-const USER = "visitor@nathancalong-portfolio";
+const USER = "guest@nlong-portfolio";
 const PROMPT = `${USER}:~$ `;
 const SSH_PROMPT = "> ";
 const SSH_COMMAND = `ssh ${USER}`;
@@ -291,20 +291,57 @@ export default function Terminal() {
               content: (
                 <>
                   {"\n"}
+                  <span className={styles.lineBold}>NinjaTech AI</span>
+                  {"\n"}
+                  <span className={styles.lineItalic}>
+                    Senior Full Stack AI Engineer
+                  </span>
+                  {"\n"}
+                  {"Feb 2026 - Present\n\n"}
+                  {
+                    "- Lead sandbox infrastructure SME and primary reviewer for core system changes\n"
+                  }
+                  {
+                    "- Drive architectural decisions across engineering, science, and QA teams\n"
+                  }
+                  {"\n"}
+                  <span className={styles.lineBold}>NinjaTech AI</span>
+                  {"\n"}
+                  <span className={styles.lineItalic}>
+                    AI Software Engineer
+                  </span>
+                  {"\n"}
+                  {"Mar 2025 - Feb 2026\n\n"}
+                  {
+                    "- Led 3-phase sandbox migration to in-house AWS VMs, cutting vendor costs by 90%\n"
+                  }
+                  {
+                    "- Built S3 static hosting serving 200+ daily AI website deployments\n"
+                  }
+                  {
+                    "- Redesigned agentic harness for multi-worker scalability with Redis streaming\n"
+                  }
+                  {
+                    "- Built observability dashboards reducing incident investigation by 90%\n"
+                  }
+                  {"\n"}
                   <span className={styles.lineBold}>ResMed</span>
                   {"\n"}
                   <span className={styles.lineItalic}>
                     Software Data Engineer
                   </span>
                   {"\n"}
-                  {"Oct 2022 - Present\n\n"}
-                  {"- Implemented various microservices using C# and Python\n"}
+                  {"Oct 2022 - Feb 2025\n\n"}
                   {
-                    "- Deployed and secured cloud infrastructure with Terraform and OAuth\n"
+                    "- Designed microservice architectures using AWS and Terraform for 10,000+ providers\n"
                   }
                   {
-                    "- Created business driven analytics with ELK stack, Snowflake and Tableau\n"
+                    "- Engineered centralised ELK logging across 500+ machines in 3 global regions\n"
                   }
+                  {
+                    "- Consolidated 20+ distributed databases into Snowflake data mesh architecture\n"
+                  }
+                  {"- Secured cloud and on-prem APIs with OAuth 2.0 and OIDC\n"}
                   {"\n"}
                   <span className={styles.lineBold}>
                     National Measurement Institute
@@ -314,14 +351,16 @@ export default function Terminal() {
                     Calibration Engineer
                   </span>
                   {"\n"}
-                  {"Mar 2021 - Sept 2022\n\n"}
+                  {"Mar 2021 - Sep 2022\n\n"}
                   {
-                    "- Calibrated gas flow devices under ISO17025 using Australia's national standards\n"
+                    "- Calibrated 30+ gas flow device types to ISO17025 using national standards\n"
                   }
                   {
-                    "- Performed data analysis and generated measurement reports\n"
+                    "- Built automated tools improving reporting speed by ~40%\n"
                   }
-                  {"- Automated various manual tasks through software"}
+                  {
+                    "- Developed data acquisition tools interfacing with lab equipment"
+                  }
                 </>
               ),
             },
@@ -592,7 +631,7 @@ export default function Terminal() {
           {showSshCursor && <span className={styles.sshCursor}>_</span>}
           {phase === "connecting" && (
             <div className={styles.sshConnecting}>
-              Connecting to nathancalong-portfolio...
+              Connecting to {USER.split("@")[1]}...
             </div>
           )}
         </div>
