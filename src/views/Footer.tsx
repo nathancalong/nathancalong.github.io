@@ -35,7 +35,7 @@ const ASCII_CONTACT = `   _____ ____  _   _ _______       _____ _______   __  __
 const socials = [
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/nathan-ca-long/",
+    href: "https://www.linkedin.com/in/nathancalong/",
     icon: <LinkedInIcon size={20} />,
   },
   {
