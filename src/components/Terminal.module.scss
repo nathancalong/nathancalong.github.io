@@ -198,6 +198,26 @@
   }
 }
 
+.whoami {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.whoamiPortrait {
+  width: 4.5lh;
+  height: 4.5lh;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0 40px rgba(232, 148, 58, 0.08);
+  flex-shrink: 0;
+}
+
+.whoamiInfo {
+  white-space: pre-wrap;
+}
+
 .prompt {
   color: var(--color-primary);
   user-select: none;

@@ -7,6 +7,7 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import resumePdf from "@/assets/documents/resume.pdf";
+import portrait from "@/assets/images/portrait.jpg";
 import { cn } from "@/lib/utils";
 import styles from "./Terminal.module.scss";
 
@@ -33,7 +34,7 @@ const SSH_COMMAND = `ssh ${USER}`;
 
 const AUTO_SEQUENCE: AutoStep[] = [{ command: "whoami" }, { command: "help" }];
 
-const TYPE_SPEED = 55;
+const TYPE_SPEED = 65;
 const SSH_TYPE_SPEED = 45;
 const PAUSE_AFTER_COMMAND = 300;
 const PAUSE_AFTER_OUTPUT = 600;
@@ -196,38 +197,45 @@ export default function Terminal() {
               id: nextId(),
               type: "output",
               content: (
-                <>
-                  <span className={styles.lineBold}>Nathan Long</span>
-                  {"\n"}
-                  <span className={styles.lineItalic}>
-                    Fullstack AI Software & Mechatronic Engineer
-                  </span>
-                  {"\n\n"}
-                  <a
-                    className={styles.lineLink}
-                    href="https://www.linkedin.com/in/nathan-ca-long/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    linkedin
-                  </a>
-                  {"  "}
-                  <a
-                    className={styles.lineLink}
-                    href="https://github.com/nathancalong/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    github
-                  </a>
-                  {"  "}
-                  <a
-                    className={styles.lineLink}
-                    href="mailto:nathancalong@gmail.com"
-                  >
-                    email
-                  </a>
-                </>
+                <div className={styles.whoami}>
+                  <img
+                    className={styles.whoamiPortrait}
+                    src={portrait}
+                    alt="Nathan Long"
+                  />
+                  <div className={styles.whoamiInfo}>
+                    <span className={styles.lineBold}>Nathan Long</span>
+                    {"\n"}
+                    <span className={styles.lineItalic}>
+                      Fullstack AI & Mechatronic Engineer
+                    </span>
+                    {"\n\n"}
+                    <a
+                      className={styles.lineLink}
+                      href="https://www.linkedin.com/in/nathan-ca-long/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      linkedin
+                    </a>
+                    {"  "}
+                    <a
+                      className={styles.lineLink}
+                      href="https://github.com/nathancalong/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      github
+                    </a>
+                    {"  "}
+                    <a
+                      className={styles.lineLink}
+                      href="mailto:nathancalong@gmail.com"
+                    >
+                      email
+                    </a>
+                  </div>
+                </div>
               ),
             },
           ];
@@ -312,7 +320,7 @@ export default function Terminal() {
 
         case "animation":
           clearVisitedCookie();
-          setTimeout(() => window.location.reload(), 500);
+          setTimeout(() => window.location.reload(), 1500);
           return [
             {
               id: nextId(),

@@ -1,6 +1,7 @@
 import { ReactNode, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import SmallCapsText from "./SmallCapsText";
 import styles from "./ProjectCard.module.scss";
 
 interface Props {
@@ -79,7 +80,7 @@ export default function ProjectCard({
       <div className={styles.textSection}>
         <div>
           <h3 className={styles.projectTitle}>
-            {title}
+            <SmallCapsText>{title}</SmallCapsText>
             <span className={styles.blinkingCursor}>_</span>
           </h3>
           <div className={styles.accentLine} />

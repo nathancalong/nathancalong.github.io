@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { useScrollReveal } from "@/hooks";
+import SmallCapsText from "./SmallCapsText";
 import styles from "./Section.module.scss";
 import { cn } from "@/lib/utils";
 
@@ -8,13 +9,6 @@ type Props = {
   displayText?: boolean;
   children?: ReactNode;
 };
-
-function toTitleCase(str: string) {
-  return str.replace(
-    /\w\S*/g,
-    (text) => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
-  );
-}
 
 export default function Section({ name, displayText, children }: Props) {
   const { ref, isVisible } = useScrollReveal();
@@ -26,9 +20,12 @@ export default function Section({ name, displayText, children }: Props) {
         className={cn(styles.sectionInner, "reveal", isVisible && "revealed")}
       >
         {displayText && (
-          <h2 className={cn(styles.sectionTitle, "glow-text")}>
-            {toTitleCase(name)}
-          </h2>
+          <SmallCapsText
+            as="h2"
+            className={cn(styles.sectionTitle, "glow-text")}
+          >
+            {name}
+          </SmallCapsText>
         )}
         {children}
       </div>
