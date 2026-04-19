@@ -1,10 +1,6 @@
 import { ProjectCard, Section } from "@/components";
 import ServerTree from "@/components/ServerTree";
-
-import Gaggiuino1 from "@/assets/images/gaggiuino1.jpg";
-import Gaggiuino2 from "@/assets/images/gaggiuino2.jpg";
-import Gaggiuino3 from "@/assets/images/gaggiuino3.jpg";
-import Gaggiuino4 from "@/assets/images/gaggiuino4.jpg";
+import BrewDiagram from "@/components/BrewDiagram";
 
 export default function Projects() {
   return (
@@ -12,7 +8,7 @@ export default function Projects() {
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         <ProjectCard
           title="Smart Coffee Machine"
-          images={[Gaggiuino1, Gaggiuino2, Gaggiuino3, Gaggiuino4]}
+          customContent={<BrewDiagram />}
           imageSide="left"
         >
           <a
