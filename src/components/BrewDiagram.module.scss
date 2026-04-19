@@ -1,0 +1,151 @@
+.diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 2rem 1.5rem;
+  gap: 1.5rem;
+}
+
+// --- Signal Flow ---
+
+.flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  justify-content: center;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+.ioColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.ioLabel {
+  font-family: var(--font-headline);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  margin-bottom: 0.2rem;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface-raised);
+  white-space: nowrap;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    border-color: var(--color-border-hover);
+    box-shadow: 0 0 12px rgba(232, 148, 58, 0.08);
+  }
+}
+
+.connectorColumn {
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+
+  @media (max-width: 480px) {
+    transform: rotate(90deg);
+    padding: 0;
+  }
+}
+
+.connectorLine {
+  width: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-border-hover), var(--color-primary), var(--color-border-hover));
+
+  @media (max-width: 480px) {
+    width: 1.5rem;
+  }
+}
+
+.controller {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--color-border-hover);
+  border-radius: 0.5rem;
+  background: var(--color-primary-dim);
+  flex-shrink: 0;
+}
+
+.controllerLabel {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-shadow: 0 0 8px var(--color-glow);
+}
+
+.controllerSub {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--color-muted);
+}
+
+// --- Divider ---
+
+.divider {
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border-hover), transparent);
+}
+
+// --- Brew Profile ---
+
+.profileSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profileLabel {
+  font-family: var(--font-headline);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+}
+
+.profile {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  margin: 0;
+  white-space: pre;
+
+  @media (max-width: 480px) {
+    font-size: 0.55rem;
+  }
+}
+
+.profileAxis {
+  color: var(--color-text);
+}
+
+.profileCurve {
+  color: var(--color-primary);
+  text-shadow: 0 0 6px var(--color-glow);
+}
