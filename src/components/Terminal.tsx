@@ -5,10 +5,13 @@ import {
   useCallback,
   type ReactNode,
 } from "react";
+import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import resumePdf from "@/assets/documents/resume.pdf";
 import portrait from "@/assets/images/portrait.jpg";
 import cn from "classnames";
+import { useWindowContext } from "./WindowContext";
+import WindowChrome from "./WindowChrome";
 import styles from "./Terminal.module.scss";
 
 // --- Types ---
@@ -95,6 +98,7 @@ function makeWelcomeLines(): TerminalLine[] {
 
 export default function Terminal() {
   const navigate = useNavigate();
+  const { closedCount, resetAll } = useWindowContext();
   const skipAnimation = hasVisitedCookie();
 
   const [phase, setPhase] = useState<Phase>(
@@ -114,6 +118,38 @@ export default function Terminal() {
 
   const [isFocused, setIsFocused] = useState(false);
   const [cursorPos, setCursorPos] = useState(0);
+  const [windowState, setWindowState] = useState<
+    "normal" | "minimized" | "maximized"
+  >("normal");
+
+  const handleMinimize = useCallback(
+    () => setWindowState((s) => (s === "minimized" ? "normal" : "minimized")),
+    [],
+  );
+  const handleMaximize = useCallback(
+    () => setWindowState((s) => (s === "maximized" ? "normal" : "maximized")),
+    [],
+  );
+
+  // Lock body scroll when maximized
+  useEffect(() => {
+    if (windowState === "maximized") {
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = "";
+      };
+    }
+  }, [windowState]);
+
+  // Escape to exit maximized
+  useEffect(() => {
+    if (windowState !== "maximized") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setWindowState("normal");
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [windowState]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
@@ -276,6 +312,8 @@ export default function Terminal() {
                   {"               - removes files and directories\n"}
                   <span className={styles.lineAccent}>clear</span>
                   {"            - clears the terminal\n"}
+                  <span className={styles.lineAccent}>restore</span>
+                  {"          - restore closed windows\n"}
                   <span className={styles.lineAccent}>animation</span>
                   {"        - replay the intro animation"}
                 </>
@@ -387,6 +425,25 @@ export default function Terminal() {
             },
           ];
 
+        case "restore":
+          if (closedCount === 0) {
+            return [
+              {
+                id: nextId(),
+                type: "output",
+                content: "restore: no closed windows to restore.",
+              },
+            ];
+          }
+          resetAll();
+          return [
+            {
+              id: nextId(),
+              type: "output",
+              content: `restore: restored ${closedCount} closed window${closedCount > 1 ? "s" : ""}.`,
+            },
+          ];
+
         case "rm": {
           let recurse = false,
             force = false,
@@ -451,7 +508,7 @@ export default function Terminal() {
           ];
       }
     },
-    [navigate],
+    [navigate, closedCount, resetAll],
   );
 
   // --- Execute command ---
@@ -617,7 +674,7 @@ export default function Terminal() {
   const isSshPhase = phase === "ssh" || phase === "connecting";
 
   return (
-    <section id="home" ref={heroRef} className={styles.terminalHero}>
+    <section id="home" ref={heroRef} className={cn(styles.terminalHero, windowState === "minimized" && styles.terminalHeroMinimized)}>
       {/* SSH intro overlay */}
       <div
         className={cn(
@@ -638,100 +695,109 @@ export default function Terminal() {
       </div>
 
       {/* Main terminal */}
-      <div
-        className={cn(
-          styles.terminalWindow,
-          isSshPhase && styles.terminalWindowHidden,
-        )}
-        onClick={focusInput}
-      >
-        <div className={styles.terminalChrome}>
-          <div className={styles.trafficLights}>
-            <span
-              className={styles.trafficDot}
-              style={{ background: "#ff5f57" }}
+      {(() => {
+        const terminalEl = (
+          <div
+            className={cn(
+              styles.terminalWindow,
+              isSshPhase && styles.terminalWindowHidden,
+              windowState === "minimized" && styles.terminalMinimized,
+              windowState === "maximized" && styles.terminalMaximized,
+            )}
+            onClick={focusInput}
+          >
+            <WindowChrome
+              title="nterm"
+              onMinimize={handleMinimize}
+              onMaximize={handleMaximize}
             />
-            <span
-              className={styles.trafficDot}
-              style={{ background: "#febc2e" }}
-            />
-            <span
-              className={styles.trafficDot}
-              style={{ background: "#28c840" }}
-            />
-          </div>
-          <span className={styles.terminalTitle}>nterm</span>
-        </div>
 
-        <div className={styles.terminalBody}>
-          <div ref={outputRef} className={styles.terminalOutput}>
-            {lines.map((line) => (
-              <div key={line.id} className={styles.line}>
-                {line.content}
+            <div className={styles.terminalBody}>
+              <div ref={outputRef} className={styles.terminalOutput}>
+                {lines.map((line) => (
+                  <div key={line.id} className={styles.line}>
+                    {line.content}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
 
-          {/* Fixed input line — used for both auto-type and interactive */}
-          {(phase === "auto" || phase === "interactive") && (
-            <div className={styles.inputLine}>
-              <span className={styles.prompt}>{PROMPT}</span>
-              {phase === "auto" ? (
-                <>
-                  <span className={styles.inputText}>{autoTypingText}</span>
-                  <span className={styles.autoTypeCursor}>_</span>
-                </>
-              ) : (
-                <>
-                  <span className={styles.inputText}>
-                    {currentInput.slice(0, cursorPos)}
-                  </span>
-                  <span
-                    className={cn(
-                      styles.cursor,
-                      !isFocused && styles.cursorBlurred,
-                    )}
-                  >
-                    {currentInput[cursorPos] ?? " "}
-                  </span>
-                  <span className={styles.inputText}>
-                    {currentInput.slice(cursorPos + 1)}
-                  </span>
-                </>
+              {(phase === "auto" || phase === "interactive") && (
+                <div className={styles.inputLine}>
+                  <span className={styles.prompt}>{PROMPT}</span>
+                  {phase === "auto" ? (
+                    <>
+                      <span className={styles.inputText}>{autoTypingText}</span>
+                      <span className={styles.autoTypeCursor}>_</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className={styles.inputText}>
+                        {currentInput.slice(0, cursorPos)}
+                      </span>
+                      <span
+                        className={cn(
+                          styles.cursor,
+                          !isFocused && styles.cursorBlurred,
+                        )}
+                      >
+                        {currentInput[cursorPos] ?? " "}
+                      </span>
+                      <span className={styles.inputText}>
+                        {currentInput.slice(cursorPos + 1)}
+                      </span>
+                    </>
+                  )}
+                </div>
               )}
+
+              <input
+                ref={inputRef}
+                className={styles.hiddenInput}
+                value={currentInput}
+                onChange={(e) => {
+                  setCurrentInput(e.target.value);
+                  setCursorPos(
+                    e.target.selectionStart ?? e.target.value.length,
+                  );
+                }}
+                onSelect={(e) => {
+                  const target = e.target as HTMLInputElement;
+                  setCursorPos(target.selectionStart ?? target.value.length);
+                }}
+                onKeyDown={handleKeyDown}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
+                autoCapitalize="off"
+                autoComplete="off"
+                autoCorrect="off"
+                spellCheck={false}
+              />
+
+              <a
+                ref={resumeLinkRef}
+                href={resumePdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: "none" }}
+              />
             </div>
-          )}
+          </div>
+        );
 
-          <input
-            ref={inputRef}
-            className={styles.hiddenInput}
-            value={currentInput}
-            onChange={(e) => {
-              setCurrentInput(e.target.value);
-              setCursorPos(e.target.selectionStart ?? e.target.value.length);
-            }}
-            onSelect={(e) => {
-              const target = e.target as HTMLInputElement;
-              setCursorPos(target.selectionStart ?? target.value.length);
-            }}
-            onKeyDown={handleKeyDown}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            autoCapitalize="off"
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck={false}
-          />
-
-          <a
-            ref={resumeLinkRef}
-            href={resumePdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ display: "none" }}
-          />
-        </div>
-      </div>
+        if (windowState === "maximized") {
+          return createPortal(
+            <>
+              <div
+                className={styles.terminalBackdrop}
+                onClick={handleMaximize}
+              />
+              {terminalEl}
+            </>,
+            document.body,
+          );
+        }
+        return terminalEl;
+      })()}
     </section>
   );
 }

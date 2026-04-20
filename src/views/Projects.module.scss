@@ -1,62 +1,72 @@
-.projectCard {
-  display: flex;
-  flex-direction: column;
+.projectWindow {
   border-radius: 0.75rem;
   overflow: hidden;
   border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease,
-    transform 0.3s ease;
+  box-shadow: 0 0 40px rgba(232, 148, 58, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     border-color: var(--color-border-hover);
     box-shadow: 0 0 30px rgba(232, 148, 58, 0.08);
   }
-}
 
-// --- Window states ---
+  // --- Window states ---
 
-.cardClosed {
-  display: none;
-}
-
-.cardMinimized {
-  .projectBody {
+  &.windowClosed {
     display: none;
   }
+
+  &.windowMinimized {
+    .tabBar,
+    .content {
+      display: none;
+    }
+  }
+
 }
 
-.cardMaximized {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  overflow-y: auto;
-  border-radius: 0.75rem;
-  border-color: var(--color-border-hover);
-  background: var(--color-surface);
+// --- Tab bar ---
 
-  .textSection {
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+.tabBar {
+  display: flex;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tab {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  background: none;
+  border: none;
+  border-right: 1px solid var(--color-border);
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.2s ease, background 0.2s ease;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &:hover {
+    color: var(--color-text);
+    background: rgba(232, 148, 58, 0.05);
   }
 }
 
-.backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 99;
+.tabActive {
+  color: var(--color-primary);
   background: var(--color-background);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+// --- Content area ---
 
-.projectBody {
+.content {
   display: flex;
-  min-height: 400px;
+  min-height: 450px;
+  background: var(--color-background);
 
   @media (max-width: 768px) {
     flex-direction: column !important;
@@ -68,7 +78,7 @@
   flex-direction: row-reverse;
 }
 
-.contentSection {
+.diagramSection {
   width: 50%;
   position: relative;
   overflow: hidden;
@@ -84,9 +94,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: rgba(18, 18, 25, 0.9);
 
   @media (max-width: 768px) {
     width: 100%;
