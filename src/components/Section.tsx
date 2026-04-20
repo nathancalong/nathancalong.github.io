@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { useScrollReveal } from "@/hooks";
 import SmallCapsText from "./SmallCapsText";
 import styles from "./Section.module.scss";
-import { cn } from "@/lib/utils";
+import cn from "classnames";
 
 type Props = {
   name: string;

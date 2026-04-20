@@ -80,7 +80,9 @@ export default function Footer() {
 
       <div className={styles.divider} />
 
-      <p className={styles.tagline}>Learn, adopt, or get left behind.</p>
+      <p className={styles.tagline}>
+        You might forget me, but you won't forget what I built.
+      </p>
     </Section>
   );
 }

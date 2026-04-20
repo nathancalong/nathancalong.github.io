@@ -8,8 +8,8 @@ export default function Projects() {
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         <ProjectCard
           title="Smart Coffee Machine"
-          customContent={<BrewDiagram />}
-          imageSide="left"
+          content={<BrewDiagram />}
+          contentSide="left"
         >
           <a
             href="https://gaggiuino.github.io/#/"
@@ -30,8 +30,8 @@ export default function Projects() {
 
         <ProjectCard
           title="Proxmox Homelab"
-          customContent={<ServerTree />}
-          imageSide="right"
+          content={<ServerTree />}
+          contentSide="right"
         >
           Using Proxmox, a few VMs and a whole bunch of LXCs, I maintain a home
           server with ~20 services. These range from DNS servers with content

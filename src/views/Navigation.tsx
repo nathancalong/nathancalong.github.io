@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Menu, X } from "lucide-react";
 import { useActiveSection } from "@/hooks";
-import { cn } from "@/lib/utils";
+import cn from "classnames";
 import styles from "./Navigation.module.scss";
 
 const navBarItems = ["skills", "projects", "contact"];

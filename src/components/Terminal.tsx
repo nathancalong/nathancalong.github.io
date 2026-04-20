@@ -8,7 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import resumePdf from "@/assets/documents/resume.pdf";
 import portrait from "@/assets/images/portrait.jpg";
-import { cn } from "@/lib/utils";
+import cn from "classnames";
 import styles from "./Terminal.module.scss";
 
 // --- Types ---
